@@ -1,9 +1,8 @@
-<!DOCTYPE HTML>
-<html lang="ja">
-    <head>
-        <meta charset="utf-8">
-        <title>Blog</title>
-    </head>
+
+<x-app-layout>
+    <x-slot name="header">
+    
+    </x-slot>
     <body>
         <h1>Blog Name</h1>
         <form action="/posts" method="POST" enctype="multipart/form-data">
@@ -27,10 +26,22 @@
                     @endforeach
                 </select>
             </div>
+            <div>
+                <h2>ポイント</h2>
+                @foreach($tags as $tag)
+
+                    <label>
+                        <input type="checkbox" value="{{ $tag->id }}" name="tags_array[]">
+                            {{$tag->tag_name}}
+                        </input>
+                    </label>
+                    
+                @endforeach         
+            </div>
             <input type="submit" value="store"/>
         </form>
         <div class="footer">
             <a href="/">戻る</a>
         </div>
     </body>
-</html>
+    </x-app-layout>

@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Cloudinary;
 use App\Models\Prefecture;
+use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Comment;
+
 
 
 class PostController extends Controller
@@ -16,26 +20,41 @@ class PostController extends Controller
         //blade内で使う変数'posts'と設定。'posts'の中身にgetを使い、インスタンス化した$postを代入。
     }
 
-    public function show(Post $post)
+    public function show(Post $post,Tag $tag,Comment $comment)
     {
-        return view('posts.show')->with(['post' => $post]);
+        $tags = $post->tags;
+        return view('posts.show')->with([
+            'post' => $post,
+            'tags'=>$tags,
+            'comment'=>$comment,
+        ]);
     //'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス。
+        
     }
 
-    public function create(Prefecture $prefecture)
+
+
+    public function create(Prefecture $prefecture,Tag $tag)
     {
-        return view('posts.create')->with(['prefectures' => $prefecture->get()]);
+        return view('posts.create')->with([
+            'prefectures' => $prefecture->get(),
+            'tags'=>$tag->get()
+        ]);
     }
 
-    public function store(Request $request, Post $post)
+    public function store(Request $request, Post $post,Tag $tag)
     {
         $input = $request['post'];
+        $post->user_id = auth()->user()->id;
+        $input_tags = $request->tags_array;
         if($request->file('image')){
         //cloudinaryへ画像を送信し、画像のURLを$image_urlに代入している
-        $post_image = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();  
+        $post_image = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
         $input += ['post_image' => $post_image];
         }
         $post->fill($input)->save();
+        $post->save();
+        $post->tags()->attach($input_tags); 
         return redirect('/posts/' . $post->id);
     }
 
