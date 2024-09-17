@@ -58,4 +58,13 @@ class PostController extends Controller
         return redirect('/posts/' . $post->id);
     }
 
+    public function rankpost(Post $post)
+    {
+        $posts = Post::withCount('likes')
+        ->orderBy('likes_count', 'desc')
+        ->get();
+
+        return view('posts.rankpost', compact('posts'));
+    }
+
 }

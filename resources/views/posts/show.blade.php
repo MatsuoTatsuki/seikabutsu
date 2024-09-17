@@ -22,6 +22,19 @@
             {{ $tag->tag_name }}
         @endforeach
         </h5>
+        @auth
+        @if($post->isLikedByAuthUser())
+            <div class="flexbox">
+                <i class="fa-solid fa-heart like-btn liked" id={{$post->id}}></i>
+                <p class="count-num">{{$post->likes->count()}}</p>
+            </div>
+        @else
+            <div class="flexbox">
+                <i class="fa-solid fa-heart like-btn" id={{$post->id}}></i>
+                <p class="count-num">{{$post->likes->count()}}</p>
+            </div>
+        @endif
+        @endauth
         <div class="footer">
             <a href="/">戻る</a>
         </div>

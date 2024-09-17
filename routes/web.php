@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\PrefectureController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::get('/dashboard', function () {
 
 Route::controller(PostController::class)->middleware(['auth'])->group(function(){
     Route::get('/', 'index')->name('index');
+    Route::get('posts/rankpost', 'rankpost')->name('rankpost');
     Route::post('/posts', 'store')->name('store');
     Route::get('/posts/create', 'create')->name('create');
     Route::get('/posts/{post}', 'show')->name('show');
@@ -47,6 +49,11 @@ Route::controller(CommentController::class)->middleware(['auth'])->group(functio
     Route::post('/comments', 'store')->name('comment.store');
   
 });
+Route::post('/posts/like', [LikeController::class, 'likePost']);
+// Route::controller(LikeController::class)->middleware(['auth'])->group(function(){
+//     Route::post('/like', 'likePost')->name('like.post');
+  
+// });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
