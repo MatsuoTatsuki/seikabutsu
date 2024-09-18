@@ -9,6 +9,7 @@ use App\Models\Prefecture;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Http;
 
 
 
@@ -23,12 +24,21 @@ class PostController extends Controller
     public function show(Post $post,Tag $tag,Comment $comment)
     {
         $tags = $post->tags;
+        $address = $post->address;
+        $apiKey = env('GOOGLE_MAPS_API_KEY');
+        $response = Http::get("https://maps.googleapis.com/maps/api/geocode/json", [
+             'address' => $address,
+              'key' => $apiKey,
+             ]);
+        $location = $response->json()['results'][0]['geometry']['location'];
+
         return view('posts.show')->with([
             'post' => $post,
             'tags'=>$tags,
             'comment'=>$comment,
+            'location'=>$location,
         ]);
-    //'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス。
+        //'post'はbladeファイルで使う変数。中身は$postはid=1のPostインスタンス。
         
     }
 

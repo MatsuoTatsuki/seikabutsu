@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('prefectures', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 50);
-            
+        Schema::table('posts', function (Blueprint $table) {
+            $table->string('address')->nullable();
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('prefectures');
+        Schema::table('posts', function (Blueprint $table) {
+            //
+        });
     }
 };
