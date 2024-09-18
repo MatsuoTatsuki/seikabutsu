@@ -1,7 +1,28 @@
 
 <x-app-layout>
     <x-slot name="header">
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap" async defer></script>
+        <script>
+            function initMap() {
+                // 緯度・経度をLaravelから取得
+                var location = { lat: {{ $location['lat'] }}, lng: {{ $location['lng'] }} };
     
+                // 地図のオプション
+                var mapOptions = {
+                    zoom: 14,
+                    center: location
+                };
+    
+                // 地図を表示
+                var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+    
+                // マーカーを設定
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+            }
+        </script>
     </x-slot>
     <body>
         <h1 class="title">
@@ -16,6 +37,8 @@
                 <p>{{ $post->body }}</p>    
             </div>
         </div>
+        <h3>地図</h3>
+        <div id="map" style="height: 500px; width: 100%;"></div>
         <a href="/prefectures/{{ $post->prefecture->id }}">{{ $post->prefecture->name }}</a>
         <h5 class='tag'>
         @foreach($tags as $tag)   

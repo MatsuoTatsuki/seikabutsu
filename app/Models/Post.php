@@ -14,7 +14,8 @@ class Post extends Model
         'body',
         'post_image',
         'prefecture_id',
-        'user_id,'
+        'user_id',
+        'address',
 
     ];
 
@@ -66,4 +67,6 @@ class Post extends Model
             return false;
         }
     }
+
+   
 }

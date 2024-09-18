@@ -18,6 +18,10 @@
                 <h2>Body</h2>
                 <textarea name="post[body]" placeholder="今日も1日お疲れさまでした。"></textarea>
             </div>
+            <div class="address">
+                <h2>住所</h2>
+                <input type="text" name="post[address]"  placeholder="住所を入力してください">
+            </div>    
             <div class="prefecture">
                 <h2>prefecture</h2>
                 <select name="post[prefecture_id]">
