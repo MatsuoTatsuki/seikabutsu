@@ -1,32 +1,32 @@
-const likeBtn = document.querySelector(".like-btn");
-console.log('aa');
-likeBtn.addEventListener("click", async (e) => {
-    const clickedEl = e.target;
-    clickedEl.classList.toggle("liked");
+// 全ての.like-btnを取得して、各ボタンにイベントリスナーを追加する
+const likeBtns = document.querySelectorAll(".like-btn");
 
-    const postId = e.target.id;
+likeBtns.forEach(likeBtn => {
+    likeBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const clickedEl = e.target;
+        clickedEl.classList.toggle("liked");
 
-    const res = await fetch("/posts/like", {
-        //リクエストメソッドはPOST
-        method: "POST",
-        headers: {
-            //Content-Typeでサーバーに送るデータの種類を伝える。今回はapplication/json
-            "Content-Type": "application/json",
-            //csrfトークンを付与
-            "X-CSRF-TOKEN": document
-                .querySelector('meta[name="csrf-token"]')
-                .getAttribute("content"),
-        },
-        body: JSON.stringify({ post_id: postId }),
-    })
-        .then((res) => res.json())
-        .then((data) => {
+        const postId = clickedEl.id.replace('like-btn-', '');
+
+        const res = await fetch("/posts/like", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document
+                    .querySelector('meta[name="csrf-token"]')
+                    .getAttribute("content"),
+            },
+            body: JSON.stringify({ post_id: postId }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            // いいね数を更新
             clickedEl.nextElementSibling.innerHTML = data.likesCount;
-        })
-        .catch(() =>
-            alert(
-                "処理が失敗しました。画面を再読み込みし、通信環境の良い場所で再度お試しください。"
-            )
-        );
+        } else {
+            alert('処理が失敗しました。');
+        }
+    });
 });
-

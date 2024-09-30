@@ -6,6 +6,10 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\PrefectureController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\FollowController;
+use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\ChatController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +37,8 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
     Route::get('/', 'index')->name('index');
     Route::get('posts/rankpost', 'rankpost')->name('rankpost');
     Route::post('/posts', 'store')->name('store');
+    Route::post('/posts/search', 'searched')->name('searched');
+    Route::get('/posts/searchprefecture', 'searchp')->name('posts.search');
     Route::get('/posts/create', 'create')->name('create');
     Route::get('/posts/{post}', 'show')->name('show');
     Route::put('/posts/{post}', 'update')->name('update');
@@ -55,10 +61,37 @@ Route::post('/posts/like', [LikeController::class, 'likePost']);
   
 // });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::controller(FollowController::class)->middleware(['auth'])->group(function(){
+    Route::post('/follow/{user}', 'follow')->name('follow');
+    Route::post('/unfollow/{user}', 'unfollow')->name('unfollow');
+  
 });
+
+Route::controller(ProfileController::class)->middleware(['auth'])->group(function(){
+    Route::get('/profile', 'edit')->name('profile.edit');
+    Route::patch('/profile', 'update')->name('profile.update');
+    Route::delete('/profile', 'destroy')->name('profile.destroy');
+    Route::get('/profile/{user}', 'show')->name('profile');
+    Route::put('/profile/image', 'image')->name('profile_image.update');
+    Route::get('/profile/{user}/following', 'following')->name('profile.following');
+    Route::get('/profile/{user}/followers', 'followers')->name('profile.followers');
+  
+});
+
+// コミュニティ関連のルート
+Route::prefix('communities')->group(function () {
+    Route::get('/', [CommunityController::class, 'index'])->name('communities.index'); // コミュニティ一覧
+    Route::get('/create', [CommunityController::class, 'create'])->name('communities.create'); // コミュニティ作成ページ
+    Route::post('/store', [CommunityController::class, 'store'])->name('communities.store'); // コミュニティの保存
+    //Route::get('/{community}', [CommunityController::class, 'show'])->name('communities.show'); // コミュニティ詳細
+});
+
+// チャット関連のルート
+Route::prefix('communities/{community}/chat')->group(function () {
+    Route::get('/', [ChatController::class, 'index'])->name('communities.chat'); // コミュニティのチャットページ
+    Route::post('/message', [ChatController::class, 'store'])->name('communities.chat.store'); // メッセージ送信
+});
+
+
 
 require __DIR__.'/auth.php';
