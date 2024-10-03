@@ -1,6 +1,7 @@
 <x-app-layout>
-    <div class="bg-gray-100 min-h-screen">
-        <div class="container mx-auto max-w-3xl p-6 bg-white shadow-lg rounded-lg mt-16">
+    <div class="container mx-auto p-4 flex">
+        <div class="container mx-auto max-w-3xl p-6 bg-white shadow-lg rounded-lg mt-16 ">
+            <h1 class="text-2xl font-semibold mb-6 text-center">コミュニティの作成</h1>
             <form action="{{ route('communities.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-6">

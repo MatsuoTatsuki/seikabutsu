@@ -1,7 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h1 class="text-3xl font-semibold text-center mb-8">{{ __('ランキング') }}</h1>
-    </x-slot>
 
     <div class="container mx-auto p-4 flex">
         <!-- 左側の住所検索フォーム -->
@@ -43,7 +40,7 @@
                 @endphp
     
                 <!-- ランキング項目 -->
-                <div class="bg-white shadow-lg rounded-lg p-4 flex items-start space-x-6" style="width: 400px; height: 420px; margin: 0 auto;">
+                <div class="bg-white shadow-lg rounded-lg p-4 flex items-start space-x-6 mb-16 mt-16">
                     <!-- ランキング表示 -->
                     <div class="text-2xl font-bold text-blue-500">
                         {{ $displayRank }}位
