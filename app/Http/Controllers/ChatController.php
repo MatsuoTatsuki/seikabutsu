@@ -6,11 +6,17 @@ use Illuminate\Http\Request;
 use Cloudinary;
 use App\Models\Message;
 use App\Models\Community;
+use Illuminate\Support\Facades\Auth;
+
 
 class ChatController extends Controller
 {
     public function index(Community $community)
     {
+        $user = Auth::user();
+        if (!$user->communities->contains($community->id)) {
+            return redirect()->route('communities.index')->with('error', 'コミュニティに参加していません');
+        }
         $messages = $community->messages()->with('user')->get();
         return view('communities.chat', compact('community', 'messages'));
     }

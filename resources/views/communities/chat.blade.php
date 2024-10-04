@@ -1,67 +1,53 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight">
-            {{ $community->name }} のチャット
-        </h2>
-    </x-slot>
+    <div class="flex h-screen mt-16">
+        <!-- 左1/3：コミュニティメンバーリスト -->
+        <aside class="w-1/3 bg-gray-300 p-4 overflow-y-auto">
+            <h2 class="text-xl font-semibold mb-4">メンバー</h2>
+            <ul>
+                @foreach($community->users as $member)
+                    <li class="flex items-center mb-4">
+                        <img src="{{ $member->image ?? 'default_icon_url' }}" alt="{{ $member->name }}" class="w-10 h-10 rounded-full mr-3">
+                        <span class="text-gray-800">{{ $member->name }}</span>
+                    </li>
+                @endforeach
+            </ul>
+        </aside>
 
-    <div class="chat-messages space-y-4 px-6 py-4">
-        @foreach($messages as $message)
-            <!-- チャットメッセージを右か左に分ける -->
-            <div class="flex {{ $message->user->id == auth()->id() ? 'justify-end' : 'justify-start' }}">
-                <!-- ユーザーのアイコン -->
-                <div class="flex items-center space-x-4">
-                    @if($message->user->id != auth()->id())
-                        <img src="{{ $message->user->image ?? 'default_icon_url' }}" alt="{{ $message->user->name }}" class="w-10 h-10 rounded-full">
-                    @endif
-                    <div class="max-w-xs lg:max-w-md">
-                        <!-- 吹き出し部分 -->
-                        <div class="{{ $message->user->id == auth()->id() ? 'bg-gray-300 text-black' : 'bg-gray-300 text-black' }} rounded-lg p-4">
-                            <!-- メッセージ送信者の名前 -->
-                            <strong class="text-sm block {{ $message->user->id == auth()->id() ? 'text-right' : '' }}">
-                                {{ $message->user->name }}
-                            </strong>
-
-                            <!-- メッセージ内容 -->
-                            @if($message->message)
-                                <p class="text-sm {{ $message->user->id == auth()->id() ? 'text-right' : '' }}">
-                                    {{ $message->message }}
-                                </p>
-                            @endif
-
-                            <!-- 画像がある場合 -->
-                            @if($message->image)
-                                <div class="mt-2">
-                                    <img src="{{ $message->image }}" alt="画像" class="w-40 h-40 object-cover rounded-md">
-                                </div>
-                            @endif
-
-                            <!-- コメントの投稿時間 -->
-                            <div class="text-xs text-gray-500 mt-1 {{ $message->user->id == auth()->id() ? 'text-right' : '' }}">
-                                {{ $message->created_at->format('Y-m-d H:i') }}
+        <!-- 右2/3：チャット画面 -->
+        <div class="w-2/3 flex flex-col">
+            <!-- メッセージ一覧 -->
+            <div class="flex-1 p-4 overflow-y-auto">
+                @foreach($messages as $message)
+                    <div class="flex {{ $message->user_id === auth()->id() ? 'justify-end' : 'justify-start' }} mb-4">
+                        @if ($message->user_id !== auth()->id())
+                            <div class="flex flex-col items-center mr-2">
+                                <span class="text-gray-600 text-xs mb-1">{{ $message->user->name }}</span>
+                                <img src="{{ $message->user->image ?? 'default_icon_url' }}" alt="{{ $message->user->name }}" class="w-8 h-8 rounded-full">
                             </div>
+                        @endif
+                        <div class="bg-{{ $message->user_id === auth()->id() ? 'gray-800 text-white' : 'gray-300' }} p-3 rounded-lg max-w-xs">
+                            <p class="text-sm">{{ $message->message }}</p>
+                            <span class="text-xs text-gray-500">{{ $message->created_at->format('Y-m-d H:i') }}</span>
                         </div>
+                        @if ($message->user_id === auth()->id())
+                            <div class="flex flex-col items-center ml-2">
+                                <span class="text-gray-600 text-xs mb-1">{{ $message->user->name }}</span>
+                                <img src="{{ $message->user->image ?? 'default_icon_url' }}" alt="{{ $message->user->name }}" class="w-8 h-8 rounded-full">
+                            </div>
+                        @endif
                     </div>
-
-                    @if($message->user->id == auth()->id())
-                        <img src="{{ $message->user->image ?? 'default_icon_url' }}" alt="{{ $message->user->name }}" class="w-10 h-10 rounded-full">
-                    @endif
-                </div>
+                @endforeach
             </div>
-        @endforeach
-    </div>
 
-    <!-- メッセージ送信フォーム -->
-    <form action="{{ route('communities.chat.store', $community) }}" method="POST" enctype="multipart/form-data" class="px-6 py-4">
-        @csrf
-        <div class="mb-4">
-            <textarea name="message" rows="3" class="w-full rounded-lg border-gray-300 focus:ring focus:ring-gray-300 focus:border-gray-300"></textarea>
+            <!-- チャット入力欄 -->
+            <form action="{{ route('communities.chat.store', $community) }}" method="POST" enctype="multipart/form-data" class="bg-gray-200 p-4 border-t">
+                @csrf
+                <div class="flex items-center space-x-4">
+                    <textarea name="message" rows="1" class="flex-1 border-gray-300 rounded-md focus:ring focus:ring-blue-200" placeholder="メッセージを入力..."></textarea>
+                    <input type="file" name="image" class="text-sm text-gray-600">
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">送信</button>
+                </div>
+            </form>
         </div>
-        <div class="mb-4">
-            <input type="file" name="image" class="w-full text-gray-700">
-        </div>
-        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-            送信
-        </button>
-    </form>
+    </div>
 </x-app-layout>

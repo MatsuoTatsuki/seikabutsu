@@ -1,7 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-    
-    </x-slot>
     <div>
         <body>
             <h1>プロフィール画面</h1>

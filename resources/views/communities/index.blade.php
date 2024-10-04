@@ -1,11 +1,8 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="text-2xl font-semibold leading-tight">コミュニティ一覧</h2>
-    </x-slot>
 
     <!-- コミュニティ作成リンク -->
     <div class="flex justify-end mb-4 px-6"> 
-        <a href="{{ route('communities.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+        <a href="{{ route('communities.create') }}" class="bg-blue-500 text-white px-4 py-2 mt-16 rounded-md hover:bg-blue-600">
             コミュニティを作成する
         </a>
     </div>
@@ -32,11 +29,22 @@
                     <p class="text-gray-600 text-sm mb-4">
                         {{ $community->description }}
                     </p>
+                     <!-- コミュニティに参加しているかどうかをチェック -->
+                        @if(Auth::user()->communities->contains($community->id))
+                        <a href="{{ route('communities.chat', $community) }}" class="text-sm text-white bg-blue-500 px-4 py-2 rounded-md hover:bg-blue-600">コミュニティチャットへ</a>
+                        <form action="{{ route('communities.leave', $community) }}" method="POST" class="inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-sm text-white bg-red-500 px-4 py-2 rounded-md hover:bg-red-600">コミュニティを抜ける</button>
+                        </form>
+                    @else
+                        <form action="{{ route('communities.join', $community) }}" method="POST" class="inline-block">
+                            @csrf
+                            <button type="submit" class="text-sm text-white bg-green-500 px-4 py-2 rounded-md hover:bg-green-600">コミュニティに参加する</button>
+                        </form>
+                    @endif
                     
-                    <!-- コミュニティのチャットリンク -->
-                    <a href="{{ route('communities.chat', $community) }}" class="text-sm text-white bg-blue-500 px-4 py-2 rounded-md hover:bg-blue-600">
-                        コミュニティチャットへ
-                    </a>
+                    
                 </div>
             </div>
         @endforeach

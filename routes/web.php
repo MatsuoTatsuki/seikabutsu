@@ -83,7 +83,8 @@ Route::prefix('communities')->group(function () {
     Route::get('/', [CommunityController::class, 'index'])->name('communities.index'); // コミュニティ一覧
     Route::get('/create', [CommunityController::class, 'create'])->name('communities.create'); // コミュニティ作成ページ
     Route::post('/store', [CommunityController::class, 'store'])->name('communities.store'); // コミュニティの保存
-    //Route::get('/{community}', [CommunityController::class, 'show'])->name('communities.show'); // コミュニティ詳細
+    Route::post('/{community}/join', [CommunityController::class, 'join'])->name('communities.join');
+    Route::delete('/{community}/leave', [CommunityController::class, 'leave'])->name('communities.leave');
 });
 
 // チャット関連のルート

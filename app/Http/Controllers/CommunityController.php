@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Cloudinary;
 use App\Models\Community;
+use Illuminate\Support\Facades\Auth;
+
 
 class CommunityController extends Controller
 {
@@ -43,8 +45,23 @@ class CommunityController extends Controller
 
         $community->users()->attach(auth()->id());
 
-        return redirect()->route('communities.chat', $community);
+        return redirect()->route('communities.index', $community);
     }
+
+    public function join(Request $request, Community $community)
+    {
+        $user = Auth::user();
+        $user->communities()->attach($community->id);
+        return redirect()->route('communities.index')->with('message', 'コミュニティに参加しました');
+    }
+
+    public function leave(Request $request, Community $community)
+    {
+        $user = Auth::user();
+        $user->communities()->detach($community->id);
+        return redirect()->route('communities.index')->with('message', 'コミュニティを退会しました');
+    }
+
 
     
 }
