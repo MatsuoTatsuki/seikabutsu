@@ -27,6 +27,9 @@
                         @endif
                         <div class="bg-{{ $message->user_id === auth()->id() ? 'gray-800 text-white' : 'gray-300' }} p-3 rounded-lg max-w-xs">
                             <p class="text-sm">{{ $message->message }}</p>
+                            @if ($message->image)
+                                <img src="{{ $message->image }}" alt="送信された画像" class="w-40 h-40 object-cover rounded-md mt-2">
+                            @endif
                             <span class="text-xs text-gray-500">{{ $message->created_at->format('Y-m-d H:i') }}</span>
                         </div>
                         @if ($message->user_id === auth()->id())
