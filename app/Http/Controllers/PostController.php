@@ -10,6 +10,8 @@ use App\Models\Tag;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Http;
+use App\Models\User; 
+use Illuminate\Support\Facades\DB; 
 
 
 
@@ -31,10 +33,40 @@ class PostController extends Controller
             return $query->where('prefecture_id', $prefectureId);
         })->get();
 
+        // 総合いいね数でユーザーをランキング（同率順位対応）
+        $topUsers = User::select('users.*')
+        ->join('posts', 'users.id', '=', 'posts.user_id')
+        ->join('likes', 'posts.id', '=', 'likes.post_id')
+        ->selectRaw('users.id, users.name, users.image, COUNT(*) as total_likes')
+        ->groupBy('users.id', 'users.name', 'users.image')
+        ->orderBy('total_likes', 'desc')
+        ->get();
+
+        // 同率順位を考慮して順位を計算
+        $rankedUsers = [];
+        $rank = 1;
+        $previousLikes = null;
+
+        foreach ($topUsers as $index => $user) {
+            // 同率順位をチェック
+            if ($previousLikes !== null && $user->total_likes < $previousLikes) {
+                $rank = $index + 1;  // ランクを更新
+            }
+
+            $rankedUsers[] = [
+                'user' => $user,
+                'rank' => $rank,
+                'total_likes' => $user->total_likes
+            ];
+
+            $previousLikes = $user->total_likes;  // 直前のユーザーのいいね数を更新
+        }
+
         return view('posts.index')->with([
             'posts' => $posts,
             'prefectures' => $prefectures,
             'selectedPrefecture' => $selectedPrefecture,
+            'rankedUsers' => $rankedUsers,
         ]);
 
     }
@@ -160,6 +192,18 @@ class PostController extends Controller
             'prefectures' => $prefectures
         ]);
     }
+
+    public function delete(Post $post)
+    {
+        // 削除できるのは投稿者自身に限る
+        if (auth()->id() === $post->user_id) {
+            $post->delete();
+            return redirect()->back()->with('message', '投稿を削除しました。');
+        }
+
+        return redirect()->back()->with('error', 'この投稿を削除する権限がありません。');
+    }
+
 
 
 }

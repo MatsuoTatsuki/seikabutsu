@@ -84,5 +84,28 @@
                 @endforeach
             </div>
         </main>
+
+        <!-- 右サイドバー - ユーザーランキング表示 -->
+        <aside class="w-full lg:w-1/4 mt-16 sticky top-0 h-screen">
+            <div class="bg-white shadow-md rounded-lg p-6 mt-16">
+                <h2 class="text-lg font-semibold mb-4">総合いいね数ランキング</h2>
+                <ul class="space-y-4">
+                    @foreach($rankedUsers as $rankedUser)
+                    <li class="flex items-center">
+                        <!-- 順位表示 -->
+                        <span class="text-lg font-bold mr-2">{{ $rankedUser['rank'] }}.</span>
+                        <!-- ユーザーアイコン -->
+                        <img src="{{ $rankedUser['user']->image }}" alt="{{ $rankedUser['user']->name }}" class="w-10 h-10 rounded-full mr-3">
+                        <div>
+                            <!-- ユーザー名表示 -->
+                            <p class="font-semibold">{{ $rankedUser['user']->name }}</p>
+                            <!-- いいね数表示 -->
+                            <p class="text-sm text-gray-500">{{ $rankedUser['total_likes'] }} いいね</p>
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </aside>
     </div>
 </x-app-layout>

@@ -1,6 +1,4 @@
 <x-app-layout>
-    <x-slot name="header">
-        {{ __('検索結果') }}
         <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap" async defer></script>
         <script>
             function initMap() {
@@ -66,37 +64,24 @@
                 map.fitBounds(bounds);
             }
         </script>
-    </x-slot>
     <body>
-        <div>
-            <form action="/posts/search" method="POST">
-              
-                @csrf
-              
-                <input type="text" name="query" placeholder="住所"/>
-                <input type="submit" value="検索">
-            </form>
-        </div>
-        <h1>検索結果</h1>
-        <div id="map" style="height: 500px; width: 500px;"></div>
-        <h1>結果一覧</h1>
-        <div class='posts'>
-            @foreach ($addresses as $address)
-            <h3>
-                <a href="{{ route('profile', $address['user_id']) }}">
-                    {{ $address['user_name'] }}
-                </a>
-            </h3>
-                <div class='post'>
-                <h2 class='title'>
-                    <a href="/posts/{{ $address['post_id'] }}">{{ $address['post_title'] }}</a>
-                </h2>
-                <div>
-                    <img src="{{ $address['post_image'] }}" alt="画像がありません。">
+        <div class="flex">
+            <!-- 左側のリスト表示 -->
+            <div class="w-1/3 p-4 overflow-y-auto h-screen mt-16">
+              <h1 class="text-2xl font-bold mb-4">検索結果</h1>
+              <div class="space-y-4">
+                @foreach($addresses as $address)
+                <div class="border p-4 shadow-lg">
+                  <h2 class="text-xl font-semibold">{{ $address['post_title'] }}</h2>
+                  <img src="{{ $address['post_image'] }}" alt="画像がありません。" class="w-full h-32 object-contain my-2">
+                  <p class="text-gray-600">{{ $address['user_name'] }}</p>
                 </div>
-                    <p class='body'>{{ $address['post_content'] }}</p>
-                </div>
-            @endforeach
-        </div>
+                @endforeach
+              </div>
+            </div>
+         <!-- 右側のGoogleマップ -->
+            <div class="w-2/3 h-screen mt-16">
+                <div id="map" style="width: 100%; height: 100%;"></div>
+        </div> 
     </body>
 </x-app-layout>

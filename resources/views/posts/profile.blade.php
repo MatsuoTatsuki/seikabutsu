@@ -71,6 +71,14 @@
                                     <i class="fa-solid fa-comment"></i>
                                     <p class="ml-2">{{ $post->comments_count }} コメント</p>
                                 </div>
+                                 <!-- 投稿の削除ボタン（投稿者のみ表示） -->
+                                @if(auth()->id() === $post->user_id)
+                                    <form action="{{ route('delete', $post) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-500 hover:text-red-700 ml-2">削除</button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     </div>

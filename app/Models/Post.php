@@ -26,7 +26,17 @@ class Post extends Model
 
     public function tags(){
         
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class, 'post_tag');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($post) {
+            // 中間テーブルの関連を解除
+            $post->tags()->detach();
+        });
     }
 
     public function user(){
