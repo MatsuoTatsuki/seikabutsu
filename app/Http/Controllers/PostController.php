@@ -23,9 +23,9 @@ class PostController extends Controller
         // 都道府県のリストを取得
         $prefectures = Prefecture::all();
         
-        // 投稿と都道府県をビューに渡す
+       
         $posts = $post->withCount('comments')->get();
-        // 選択された都道府県がリクエストにあるか確認
+       
         $selectedPrefecture = $request->input('prefecture_id', ''); // デフォルトは空
 
         // 投稿を取得（フィルタリングなどは任意）
@@ -187,10 +187,40 @@ class PostController extends Controller
         $posts = $query->get();
         $prefectures = Prefecture::all();
 
-        return view('posts.index')->with([
-            'posts' => $posts,
-            'prefectures' => $prefectures
-        ]);
+       // 総合いいね数でユーザーをランキング（同率順位対応）
+       $topUsers = User::select('users.*')
+       ->join('posts', 'users.id', '=', 'posts.user_id')
+       ->join('likes', 'posts.id', '=', 'likes.post_id')
+       ->selectRaw('users.id, users.name, users.image, COUNT(*) as total_likes')
+       ->groupBy('users.id', 'users.name', 'users.image')
+       ->orderBy('total_likes', 'desc')
+       ->get();
+
+       // 同率順位を考慮して順位を計算
+       $rankedUsers = [];
+       $rank = 1;
+       $previousLikes = null;
+
+       foreach ($topUsers as $index => $user) {
+           // 同率順位をチェック
+           if ($previousLikes !== null && $user->total_likes < $previousLikes) {
+               $rank = $index + 1;  // ランクを更新
+           }
+
+           $rankedUsers[] = [
+               'user' => $user,
+               'rank' => $rank,
+               'total_likes' => $user->total_likes
+           ];
+
+           $previousLikes = $user->total_likes;  // 直前のユーザーのいいね数を更新
+       }
+
+       return view('posts.index')->with([
+           'posts' => $posts,
+           'prefectures' => $prefectures,
+           'rankedUsers' => $rankedUsers,
+       ]);
     }
 
     public function delete(Post $post)

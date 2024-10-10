@@ -4,35 +4,37 @@
         <!-- 左サイドバー -->
         <aside class="w-full lg:w-1/4  mt-16 bg-gray-100 p-6 rounded-lg">
         <div class="fixed top-0 left-0 w-1/4 mt-16 bg-gray-100 p-6 h-screen">
-            <!-- アカウント情報 -->
-            <div class="text-center mb-6">
-                <img src="{{ auth()->user()->image ?? 'default_icon_url' }}" alt="{{ auth()->user()->name }}" class="w-20 h-20 rounded-full mx-auto mb-2">
-                <a href="{{ route('profile', auth()->user()->id) }}">
-                    {{ auth()->user()->name }}
-                </a>           
-            </div>
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <!-- アカウント情報 -->
+                <div class="text-center mb-6">
+                    <img src="{{ auth()->user()->image ?? 'default_icon_url' }}" alt="{{ auth()->user()->name }}" class="w-20 h-20 rounded-full mx-auto mb-2">
+                    <a href="{{ route('profile', auth()->user()->id) }}">
+                        {{ auth()->user()->name }}
+                    </a>           
+                </div>
 
-            <!-- 検索フォーム -->
-            <form action="/posts/search" method="POST" class="mb-6">
-                @csrf
-                <input type="text" name="query" placeholder="住所" class="w-full p-2 border border-gray-300 rounded mb-4">
-                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">検索</button>            
-            </form>
+                <!-- 検索フォーム -->
+                <form action="/posts/search" method="POST" class="mb-6">
+                    @csrf
+                    <input type="text" name="query" placeholder="住所" class="w-full p-2 border border-gray-300 rounded mb-4">
+                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">検索</button>            
+                </form>
 
-            <!-- 絞り込み -->
-            <form action="{{ route('posts.search') }}" method="GET" class="mb-6">
-                <label for="prefecture" class="block text-sm font-medium text-gray-700 mb-2">地域で絞り込み</label>
-                <select name="prefecture_id" id="prefecture" class="w-full p-2 border border-gray-300 rounded">
-                    <option value="">すべての都道府県</option>
-                    @foreach ($prefectures as $prefecture)
-                    <option value="{{ $prefecture->id }}" 
-                        @if(request('prefecture_id') == $prefecture->id) selected @endif>
-                        {{ $prefecture->name }}
-                    </option>
-                    @endforeach
-                </select>
-                <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded mt-2">絞り込み</button>
-            </form>
+                <!-- 絞り込み -->
+                <form action="{{ route('posts.search') }}" method="GET" class="mb-6">
+                    <label for="prefecture" class="block text-sm font-medium text-gray-700 mb-2">地域で絞り込み</label>
+                    <select name="prefecture_id" id="prefecture" class="w-full p-2 border border-gray-300 rounded">
+                        <option value="">すべての都道府県</option>
+                        @foreach ($prefectures as $prefecture)
+                        <option value="{{ $prefecture->id }}" 
+                            @if(request('prefecture_id') == $prefecture->id) selected @endif>
+                            {{ $prefecture->name }}
+                        </option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded mt-2">絞り込み</button>
+                </form>
+            </div>    
         </div>
         </aside>
 
