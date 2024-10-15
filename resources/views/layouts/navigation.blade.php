@@ -5,10 +5,11 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('index') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                    <a href="{{ route('index') }}" class="text-xl font-extrabold text-gray-500 hover:bg-gray-600" style="font-weight: 900; font-family: 'Poppins', 'Noto Sans JP', sans-serif;">
+                        古着ぽすと
                     </a>
-                </div>
+                </div>                
+                
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -22,10 +23,10 @@
                     {{ __('communities') }}
                 </x-nav-link>
                 <!-- 検索フォームを追加 -->
-                <form action="/posts/search" method="POST" class="flex items-center space-x-2 ml-auto">
+                <form action="/posts/search" method="POST" class="absolute right-28 top-0 mt-4 flex items-center space-x-2">
                     @csrf
-                    <input type="text" name="query" placeholder="場所" class=" p-2 border border-gray-300 rounded ">
-                    <button type="submit" class="bg-gray-500 text-white py-2 px-4 rounded">検索</button>
+                    <input type="text" name="query" placeholder="場所を入力してください" class=" p-2 border border-gray-300 rounded ">
+                    <button type="submit" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600">検索</button>
                 </form>
                 </div>
             </div>

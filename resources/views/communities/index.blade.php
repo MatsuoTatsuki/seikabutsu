@@ -2,7 +2,7 @@
 
     <!-- コミュニティ作成リンク -->
     <div class="flex justify-end mb-4 px-6"> 
-        <a href="{{ route('communities.create') }}" class="bg-blue-500 text-white px-4 py-2 mt-16 rounded-md hover:bg-blue-600">
+        <a href="{{ route('communities.create') }}" class="bg-gray-500 text-white px-4 py-2 mt-16 rounded-md hover:bg-gray-600">
             コミュニティを作成する
         </a>
     </div>
@@ -31,16 +31,16 @@
                     </p>
                      <!-- コミュニティに参加しているかどうかをチェック -->
                         @if(Auth::user()->communities->contains($community->id))
-                        <a href="{{ route('communities.chat', $community) }}" class="text-sm text-white bg-blue-500 px-4 py-2 rounded-md hover:bg-blue-600">コミュニティチャットへ</a>
+                        <a href="{{ route('communities.chat', $community) }}" class="text-sm text-white bg-gray-500 px-4 py-2 rounded-md hover:bg-gray-600">コミュニティチャットへ</a>
                         <form action="{{ route('communities.leave', $community) }}" method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-sm text-white bg-red-500 px-4 py-2 rounded-md hover:bg-red-600">コミュニティを抜ける</button>
+                            <button type="submit" class="text-sm text-white bg-gray-500 px-4 py-2 rounded-md hover:bg-gray-600">コミュニティを抜ける</button>
                         </form>
                     @else
                         <form action="{{ route('communities.join', $community) }}" method="POST" class="inline-block">
                             @csrf
-                            <button type="submit" class="text-sm text-white bg-green-500 px-4 py-2 rounded-md hover:bg-green-600">コミュニティに参加する</button>
+                            <button type="submit" class="text-sm text-white bg-gray-500 px-4 py-2 rounded-md hover:bg-gray-600">コミュニティに参加する</button>
                         </form>
                     @endif
                     

@@ -2,9 +2,8 @@
     
     <div class="container mx-auto flex  flex-wrap lg:flex-nowrap gap-6">
         <!-- 左サイドバー -->
-        <aside class="w-full lg:w-1/4  mt-16 bg-gray-100 p-6 rounded-lg">
-        <div class="fixed top-0 left-0 w-1/4 mt-16 bg-gray-100 p-6 h-screen">
-            <div class="bg-white shadow-md rounded-lg p-6">
+        <aside class="w-full lg:w-1/4 mt-16 sticky top-0 h-screen">
+        <div class="bg-white shadow-md rounded-lg p-6 mt-16">
                 <!-- アカウント情報 -->
                 <div class="text-center mb-6">
                     <img src="{{ auth()->user()->image ?? 'default_icon_url' }}" alt="{{ auth()->user()->name }}" class="w-20 h-20 rounded-full mx-auto mb-2">
@@ -17,7 +16,7 @@
                 <form action="/posts/search" method="POST" class="mb-6">
                     @csrf
                     <input type="text" name="query" placeholder="住所" class="w-full p-2 border border-gray-300 rounded mb-4">
-                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">検索</button>            
+                    <button type="submit" class="w-full bg-gray-500 text-white py-2 rounded hover:bg-gray-600">検索</button>            
                 </form>
 
                 <!-- 絞り込み -->
@@ -32,16 +31,15 @@
                         </option>
                         @endforeach
                     </select>
-                    <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded mt-2">絞り込み</button>
-                </form>
-            </div>    
+                    <button type="submit" class="w-full bg-gray-500 text-white py-2 rounded mt-2 hover:bg-gray-600">絞り込み</button>
+                </form>  
         </div>
         </aside>
 
         <!-- メインコンテンツ -->
         <main class="w-full lg:w-2/4 mt-16 ">
             <!-- 投稿作成ボタン -->
-            <a href="{{ route('create') }}" class="block bg-blue-500 text-white text-center py-2 rounded mb-6">投稿する</a>
+            <a href="{{ route('create') }}" class="block bg-gray-500 text-white text-center py-2 rounded mb-6 hover:bg-gray-600">投稿する</a>
 
             <!-- 投稿一覧 -->
             <div class="space-y-6">

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container mx-auto p-6 bg-gray-400">
+    <div class="container mx-auto p-6">
         <!-- 3列のレイアウト -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             
