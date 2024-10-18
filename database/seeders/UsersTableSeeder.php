@@ -19,8 +19,8 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'name' => 'John Doe',
-                'email' => 'john.doe@example.com',
+                'name' => '大阪太郎',
+                'email' => 'osaka@example.com',
                 'email_verified_at' => Carbon::now(),
                 'password' => Hash::make('password'),
                 'remember_token' => Str::random(10),
@@ -29,8 +29,8 @@ class UsersTableSeeder extends Seeder
                 
             ],
             [
-                'name' => 'Jane Smith',
-                'email' => 'jane.smith@example.com',
+                'name' => '東京太郎',
+                'email' => 'tokyo@example.com',
                 'email_verified_at' => Carbon::now(),
                 'password' => Hash::make('password'),
                 'remember_token' => Str::random(10),
@@ -38,8 +38,26 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => Carbon::now(),
             ],
             [
-                'name' => 'Bob Johnson',
-                'email' => 'bob.johnson@example.com',
+                'name' => 'テスト',
+                'email' => 'test@example.com',
+                'email_verified_at' => Carbon::now(),
+                'password' => Hash::make('password'),
+                'remember_token' => Str::random(10),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => '名古屋太郎',
+                'email' => 'nagoya@example.com',
+                'email_verified_at' => Carbon::now(),
+                'password' => Hash::make('password'),
+                'remember_token' => Str::random(10),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'name' => '福岡太郎',
+                'email' => 'fukuoka@example.com',
                 'email_verified_at' => Carbon::now(),
                 'password' => Hash::make('password'),
                 'remember_token' => Str::random(10),
