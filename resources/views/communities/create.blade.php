@@ -20,7 +20,7 @@
                 </div>
 
                 <div class="flex justify-center">
-                    <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600">
+                    <button type="submit" class="bg-gray-500 text-white px-6 py-3 rounded-lg hover:bg-gray-600">
                         作成
                     </button>
                 </div>

@@ -26,7 +26,7 @@
                 <!-- 住所 -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700">住所</label>
-                    <input type="text" name="post[address]" placeholder="住所を入力してください" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                    <input type="text" name="post[address]" placeholder="購入した場所を教えてください" class="mt-1 block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500" />
                 </div>
                 
                 <!-- 都道府県 -->
@@ -41,7 +41,7 @@
 
                 <!-- タグ -->
                 <div class="mb-6">
-                    <h2 class="text-sm font-medium text-gray-700 mb-2">当てはまるものを選んでください</h2>
+                    <h2 class="text-sm font-medium text-gray-700 mb-2">購入したお店の価格帯を教えてください</h2>
                     @foreach($tags as $tag)
                         <label class="inline-flex items-center mr-4">
                             <input type="checkbox" name="tags_array[]" value="{{ $tag->id }}" class="form-checkbox text-blue-600">
@@ -52,7 +52,7 @@
                 
                 <!-- 投稿ボタン -->
                 <div class="flex justify-center">
-                    <input type="submit" value="投稿" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-lg shadow">
+                    <input type="submit" value="投稿" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-lg shadow">
                 </div>
             </form>
         </div>

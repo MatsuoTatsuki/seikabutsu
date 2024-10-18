@@ -88,7 +88,7 @@
         <!-- 右サイドバー - ユーザーランキング表示 -->
         <aside class="w-full lg:w-1/4 mt-16 sticky top-0 h-screen">
             <div class="bg-white shadow-md rounded-lg p-6 mt-16">
-                <h2 class="text-lg font-semibold mb-4">総合いいね数ランキング</h2>
+                <h2 class="text-lg font-semibold mb-4">ユーザランキング</h2>
                 <ul class="space-y-4">
                     @foreach($rankedUsers as $rankedUser)
                     <li class="flex items-center">

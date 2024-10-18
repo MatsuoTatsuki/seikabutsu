@@ -16,11 +16,11 @@ class TagsSeeder extends Seeder
     public function run(): void
     {
         DB::table('tags')->insert([
-                    ['tag_name' => '甘め'],
-                    ['tag_name' => '辛め'],
+                    ['tag_name' => '高め'],
                     ['tag_name' => '普通'],
-                    ['tag_name' => 'しょっぱい'],
-                    ['tag_name' => '酸っぱい'],
+                    ['tag_name' => '安め'],
+                    
+                    
                 ]);
     }
 }

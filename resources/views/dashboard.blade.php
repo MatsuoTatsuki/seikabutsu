@@ -11,10 +11,10 @@
                 @csrf
                 <input type="text" name="query" placeholder="場所を入力してください" 
                     class="p-2 border border-gray-300 rounded w-full" />
-                <button type="submit" 
-                    class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600">
-                    検索
+                <button type="submit" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 flex items-center justify-center">
+                    <i class="fas fa-search"></i>
                 </button>
+                    
             </form>
 
             <!-- 投稿一覧へボタン -->
@@ -37,8 +37,10 @@
                     class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
                     <div class="bg-white p-6 rounded-lg shadow-lg max-w-lg">
                         <h2 class="text-xl font-semibold mb-4">使い方ガイド</h2>
-                        <p>使い方はシンプルです！</p>
-                        <p>購入した古着を投稿してください！</p>
+                        <p class="text-left">使い方は大きく分けて以下の3つです!</p>
+                        <p class="text-left">・自慢したい古着、お勧めの古着屋を投稿してください!</p>
+                        <p class="text-left">・たくさんの人の投稿をみて楽しんでください!</p>
+                        <p class="text-left">・好きなコミュニティに入って趣味の合う人同士で会話を楽しんでください!</p>
                         <div class="mt-6 text-center">
                             <button @click="open = false" 
                                 class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600">

@@ -32,8 +32,16 @@
                             <img src="{{ asset('images/default.png') }}" alt="画像がありません。" class="w-full h-auto max-h-96 object-cover mb-4 mx-auto">
                         @endif
                         <div id="map" class="w-full h-32 mb-4" style="height: 150px;"></div>
+                        <div class="mb-4">
+                            <h4 class="text-gray-700">価格帯</h4>
+                            @foreach($post->tags as $tag)
+                                <span class="text-gray-800 text-sm px-2 py-1 rounded mr-2">
+                                    {{ $tag->tag_name }}
+                                </span>
+                            @endforeach
+                        </div>
                         <!-- 地域 -->
-                        <p class="text-blue-500 hover:underline mb-2">{{ $post->prefecture->name }}</p>
+                        <p class="text-gray-500 hover:underline mb-2">{{ $post->prefecture->name }}</p>
                         <p class="text-gray-700">{{ $post->address}}</p>
                     </div>
             
