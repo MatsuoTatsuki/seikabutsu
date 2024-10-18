@@ -33,8 +33,8 @@
     
                     <!-- 投稿者のアイコンと情報 -->
                 <div class="flex items-center mb-4">
-                    <img src="{{ $post->user->image ?? 'default_icon_url' }}" alt="{{ $post->user->name }}" class="w-8 h-8 rounded-full object-cover mr-2">
-                    <a href="{{ route('profile', $post->user->id) }}" class="text-blue-500 hover:underline">{{ $post->user->name }}</a>
+                    <img src="{{ $post->user->image ?? 'default_icon_url' }}" alt="{{ $post->user->name }}" class="w-8 h-8 rounded-full mr-2">
+                    <a href="{{ route('profile', $post->user->id) }}" class="text-gray-800 hover:underline">{{ $post->user->name }}</a>
                 </div>
     
                     <!-- 投稿の内容 -->
@@ -45,7 +45,11 @@
                     <!-- いいね数とコメント数 -->
                     <div class="flex justify-between w-full text-gray-500 text-sm">
                         <div class="flex items-center">
-                            <i class="fa-solid fa-heart text-red-500 mr-1"></i>
+                            @if($post->isLikedByAuthUser())
+                                <i class="fa-solid fa-heart like-btn liked text-red-500" id="like-btn-{{ $post->id }}"></i>
+                            @else
+                                <i class="fa-solid fa-heart like-btn" id="like-btn-{{ $post->id }}"></i>
+                            @endif
                             <span>{{ $post->likes_count }} いいね</span>
                         </div>
                         <div class="flex items-center">

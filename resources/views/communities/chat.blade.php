@@ -7,7 +7,9 @@
                 @foreach($community->users as $member)
                     <li class="flex items-center mb-4">
                         <img src="{{ $member->image ?? 'default_icon_url' }}" alt="{{ $member->name }}" class="w-10 h-10 rounded-full mr-3">
-                        <span class="text-gray-800">{{ $member->name }}</span>
+                        <a href="{{ route('profile', $member->id) }}" class="text-gray-800 hover:underline">
+                            <span>{{ $member->name }}</span>
+                        </a>
                     </li>
                 @endforeach
             </ul>
@@ -30,7 +32,7 @@
                             @if ($message->image)
                                 <img src="{{ $message->image }}" alt="送信された画像" class="w-40 h-40 object-cover rounded-md mt-2">
                             @endif
-                            <span class="text-xs text-gray-500">{{ $message->created_at->format('Y-m-d H:i') }}</span>
+                            <span class="text-xs text-gray-500">{{ $message->created_at->diffForHumans() }}</span>
                         </div>
                         @if ($message->user_id === auth()->id())
                             <div class="flex flex-col items-center ml-2">
@@ -48,7 +50,7 @@
                 <div class="flex items-center space-x-4">
                     <textarea name="message" rows="1" class="flex-1 border-gray-300 rounded-md focus:ring focus:ring-blue-200" placeholder="メッセージを入力..."></textarea>
                     <input type="file" name="image" class="text-sm text-gray-600">
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">送信</button>
+                    <button type="submit" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">送信</button>
                 </div>
             </form>
         </div>

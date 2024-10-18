@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('index') }}" class="text-xl font-extrabold text-gray-500 hover:bg-gray-600" style="font-weight: 900; font-family: 'Poppins', 'Noto Sans JP', sans-serif;">
+                    <a href="{{ route('index') }}" class="text-xl font-extrabold text-gray-500 hover:underline" style="font-weight: 900; font-family: 'Poppins', 'Noto Sans JP', sans-serif;">
                         古着ぽすと
                     </a>
                 </div>                
@@ -13,15 +13,21 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    {{ __('ホーム') }}
+                </x-nav-link>
                 <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
-                    {{ __('Index') }}
+                    {{ __('投稿一覧') }}
                 </x-nav-link>
                 <x-nav-link :href="route('rankpost')" :active="request()->routeIs('rankpost')">
-                    {{ __('rankpost') }}
+                    {{ __('ランキング') }}
                 </x-nav-link>
                 <x-nav-link :href="route('communities.index')" :active="request()->routeIs('communities.index')">
-                    {{ __('communities') }}
+                    {{ __('コミュニティ') }}
                 </x-nav-link>
+                <x-nav-link :href="route('profile', ['user' => Auth::user()->id])" :active="request()->routeIs('profile')">
+                    {{ __('プロフィール') }}
+                </x-nav-link>                                  
                 <!-- 検索フォームを追加 -->
                 <form action="/posts/search" method="POST" class="absolute right-28 top-0 mt-4 flex items-center space-x-2">
                     @csrf

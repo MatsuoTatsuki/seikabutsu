@@ -64,7 +64,7 @@
                     @csrf
                     <input type="hidden" name="comment[post_id]" value="{{ $post->id }}">
                     <textarea name="comment[comment]" placeholder="コメントを入力してください" class="w-full p-4 rounded-lg border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 mb-4"></textarea>
-                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg">コメントを投稿</button>
+                    <button type="submit" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600">コメントを投稿</button>
                 </form>
                 @endauth
 
@@ -75,10 +75,12 @@
                     <div class="mb-4">
                         <div class="flex items-start space-x-4">
                             <!-- ユーザーアイコン -->
-                            <img src="{{ $comment->user->profile_image ?? 'default_avatar.png' }}" class="w-10 h-10 rounded-full">
+                            <img src="{{ $comment->user->image ?? 'default_avatar.png' }}" class="w-10 h-10 rounded-full">
                             <div>
                                 <!-- ユーザー名 -->
-                                <p class="font-semibold">{{ $comment->user->name }}</p>
+                                <a href="{{ route('profile', $comment->user->id) }}" class="font-semibold hover:underline">
+                                    <p>{{ $comment->user->name }}</p>
+                                </a>
                                 <!-- コメント本文 -->
                                 <p class="text-gray-700">{{ $comment->comment }}</p>
                                 <!-- 投稿日時 -->

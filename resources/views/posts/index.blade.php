@@ -7,7 +7,7 @@
                 <!-- アカウント情報 -->
                 <div class="text-center mb-6">
                     <img src="{{ auth()->user()->image ?? 'default_icon_url' }}" alt="{{ auth()->user()->name }}" class="w-20 h-20 rounded-full mx-auto mb-2">
-                    <a href="{{ route('profile', auth()->user()->id) }}">
+                    <a href="{{ route('profile', auth()->user()->id) }}" class="hover:underline">
                         {{ auth()->user()->name }}
                     </a>           
                 </div>
@@ -48,7 +48,7 @@
                         <!-- 投稿者情報 -->
                         <div class="flex items-center mb-4">
                             <img src="{{ $post->user->image ?? 'default_icon_url' }}" alt="{{ $post->user->name }}" class="w-10 h-10 rounded-full">
-                            <a href="{{ route('profile', $post->user->id) }}" class="ml-3 text-lg font-semibold">{{ $post->user->name }}</a>
+                            <a href="{{ route('profile', $post->user->id) }}" class="ml-3 text-lg font-semibold hover:underline">{{ $post->user->name }}</a>
                         </div>
 
                         <!-- 投稿内容 -->
@@ -98,7 +98,9 @@
                         <img src="{{ $rankedUser['user']->image }}" alt="{{ $rankedUser['user']->name }}" class="w-10 h-10 rounded-full mr-3">
                         <div>
                             <!-- ユーザー名表示 -->
-                            <p class="font-semibold">{{ $rankedUser['user']->name }}</p>
+                            <a href="{{ route('profile', $rankedUser['user']->id) }}" class="font-semibold hover:underline">
+                                <p>{{ $rankedUser['user']->name }}</p>
+                            </a>
                             <!-- いいね数表示 -->
                             <p class="text-sm text-gray-500">{{ $rankedUser['total_likes'] }} いいね</p>
                         </div>

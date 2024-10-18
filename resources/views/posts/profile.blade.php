@@ -7,7 +7,7 @@
             <div class="bg-gray-200 shadow-lg rounded-lg p-4 text-center mt-16 sticky top-0 h-screen">
                 <!-- プロフィール画像 -->
                 <div class="flex justify-center mb-4">
-                    <img src="{{ $user->image ?? 'default_icon_url' }}" alt="{{ $user->name }}" class="w-32 h-32 rounded-full object-cover">
+                    <img src="{{ $user->image ?? 'default_icon_url' }}" alt="{{ $user->name }}" class="w-32 h-32 rounded-full ">
                 </div>
                 <h2 class="text-xl font-semibold">{{ $user->name }}</h2>
 
@@ -15,12 +15,12 @@
                 @if(auth()->user()->following->contains($user->id))
                     <form action="{{ route('unfollow', $user) }}" method="POST" class="mt-4">
                         @csrf
-                        <button type="submit" class="bg-red-500 text-white py-2 px-4 rounded">フォロー解除</button>
+                        <button type="submit" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600">フォロー解除</button>
                     </form>
                 @else
                     <form action="{{ route('follow', $user) }}" method="POST" class="mt-4">
                         @csrf
-                        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">フォロー</button>
+                        <button type="submit" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600">フォロー</button>
                     </form>
                 @endif
 
@@ -111,16 +111,16 @@
                                 </p>
                                  <!-- コミュニティに参加しているかどうかをチェック -->
                                     @if(Auth::user()->communities->contains($community->id))
-                                    <a href="{{ route('communities.chat', $community) }}" class="text-sm text-white bg-blue-500 px-4 py-2 rounded-md hover:bg-blue-600">コミュニティチャットへ</a>
+                                    <a href="{{ route('communities.chat', $community) }}" class="text-sm text-white bg-gray-500 px-4 py-2 rounded-md hover:bg-gray-600">コミュニティチャットへ</a>
                                     <form action="{{ route('communities.leave', $community) }}" method="POST" class="inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-sm text-white bg-red-500 px-4 py-2 rounded-md hover:bg-red-600">コミュニティを抜ける</button>
+                                        <button type="submit" class="text-sm text-white bg-gray-500 px-4 py-2 rounded-md hover:bg-gray-600">コミュニティを抜ける</button>
                                     </form>
                                 @else
                                     <form action="{{ route('communities.join', $community) }}" method="POST" class="inline-block">
                                         @csrf
-                                        <button type="submit" class="text-sm text-white bg-green-500 px-4 py-2 rounded-md hover:bg-green-600">コミュニティに参加する</button>
+                                        <button type="submit" class="text-sm text-white bg-gray-500 px-4 py-2 rounded-md hover:bg-gray-600">コミュニティに参加する</button>
                                     </form>
                                 @endif
                                 

@@ -67,7 +67,7 @@
     <body>
         <div class="flex">
             <!-- 左側のリスト表示 -->
-            <div class="w-1/3 p-4 overflow-y-auto h-screen mt-16">
+            <div class="w-1/3 p-4 bg-white overflow-y-auto h-screen mt-16">
               <h1 class="text-2xl font-bold mb-4">検索結果</h1>
               <div class="space-y-4">
                 @foreach($addresses as $address)
