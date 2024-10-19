@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             PrefecturesSeeder::class,
             TagsSeeder::class,
-
+            PostSeeder::class,
+            CommunitySeeder::class,
         ]);
     }
 }
