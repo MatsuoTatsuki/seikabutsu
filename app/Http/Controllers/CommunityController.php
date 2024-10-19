@@ -12,7 +12,7 @@ class CommunityController extends Controller
 {
     public function index()
     {
-        $communities = Community::all();
+        $communities = Community::orderBy('created_at', 'desc')->get();
         return view('communities.index', compact('communities'));
     }
 

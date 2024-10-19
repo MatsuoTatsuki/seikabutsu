@@ -51,8 +51,8 @@ class UsersTableSeeder extends Seeder
                 'image' => 'https://res.cloudinary.com/dfjtayhga/image/upload/v1729331683/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_2024-10-19_185345_wxxdd6.png',
             ],
             [
-                'name' => '名古屋太郎',
-                'email' => 'nagoya@example.com',
+                'name' => '愛知太郎',
+                'email' => 'aichi@example.com',
                 'email_verified_at' => Carbon::now(),
                 'password' => Hash::make('password'),
                 'remember_token' => Str::random(10),

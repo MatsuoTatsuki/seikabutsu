@@ -19,6 +19,8 @@ class Post extends Model
 
     ];
 
+
+
     public function prefecture()
     {
         return $this->belongsTo(Prefecture::class);
