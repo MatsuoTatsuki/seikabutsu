@@ -24,14 +24,14 @@ class PostController extends Controller
         $prefectures = Prefecture::all();
         
        
-        $posts = $post->withCount('comments')->get();
+        $posts = $post->withCount('comments')->orderBy('created_at', 'desc')->paginate(3);
        
         $selectedPrefecture = $request->input('prefecture_id', ''); // デフォルトは空
 
         // 投稿を取得（フィルタリングなどは任意）
         $posts = Post::when($selectedPrefecture, function ($query, $prefectureId) {
             return $query->where('prefecture_id', $prefectureId);
-        })->get();
+        })->withCount('comments')->orderBy('created_at', 'desc')->paginate(3);
 
         // 総合いいね数でユーザーをランキング（同率順位対応）
         $topUsers = User::select('users.*')
@@ -61,6 +61,8 @@ class PostController extends Controller
 
             $previousLikes = $user->total_likes;  // 直前のユーザーのいいね数を更新
         }
+
+        
 
         return view('posts.index')->with([
             'posts' => $posts,
