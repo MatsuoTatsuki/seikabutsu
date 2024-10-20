@@ -1,66 +1,86 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# アプリ名
+**古着ぽすと**
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+## 概要
+古着ぽすとは、古着好きのユーザーが自分のお気に入りの古着や、おすすめの古着屋を投稿・共有できる古着投稿アプリケーションです。投稿された古着屋情報を他のユーザーが閲覧し、好みの古着屋を見つけることができます。
+
+## 作成背景
+私は古着が好きで、古着屋巡りをよく行います。しかし、古着屋はそれぞれ個性があり、自分の趣味に合った古着屋を見つけるのは難しいことが多いです。また、インターネット上ではお客様目線の古着屋情報が少ない現状です。そこで、古着好きの人々が簡単に情報を投稿・共有できるアプリを開発しました。このアプリは、古着屋探しをより簡単にし、古着好き同士のコミュニケーションの場を提供します。
+
+## 使用技術
+<p align="left">
+  <img src="https://skillicons.dev/icons?i=php" alt="PHP" width="50" height="50"/>
+  <img src="https://skillicons.dev/icons?i=html" alt="HTML" width="50" height="50"/>
+  <img src="https://skillicons.dev/icons?i=css" alt="CSS" width="50" height="50"/>
+  <img src="https://skillicons.dev/icons?i=javascript" alt="JavaScript" width="50" height="50"/>
+  <img src="https://skillicons.dev/icons?i=mysql" alt="MySQL" width="50" height="50"/>
+  <img src="https://skillicons.dev/icons?i=tailwind" alt="Tailwind CSS" width="50" height="50"/>
+  <img src="https://skillicons.dev/icons?i=laravel" alt="Laravel" width="50" height="50"/>
+  <img src="https://skillicons.dev/icons?i=heroku" alt="Heroku" width="50" height="50"/>
 </p>
 
-## About Laravel
+## URL・テストユーザー
+- URL: **[https://furugi-post-7dae7e0c3731.herokuapp.com/]**
+- テストユーザー:
+  - ログイン名: テスト
+  - ログインID（メールアドレス）: **[test@example.com]**
+  - パスワード: **[password]**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 機能
+- **投稿機能**: 古着やおすすめの古着屋情報を投稿できる
+- **ランキング機能**: いいね数に基づく投稿ランキング・ユーザーランキング
+- **コミュニティ機能**: 趣味の合うユーザー同士が交流できる。また、コミュニティでグループチャットが可能
+- **地図検索機能**: 住所で古着屋を検索し、地図上で投稿の場所を確認できる
+- **都道府県フィルタ機能**: 投稿一覧画面で都道府県による絞り込みが可能
+- **フォロー機能**: ユーザーのフォローが可能。また、それぞれのユーザーのフォロー数、フォロワー数の閲覧が可能
+- **ログイン機能**: Laravel breezeを用いてログイン機能を実装
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## デモ
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+アプリの動作デモを以下に示します。
 
-## Learning Laravel
+### ログイン画面
+<img src="./screenshots/login.png" alt="ログイン画面" width="500">
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### ホーム画面
+<img src="./screenshots/home.png" alt="ホーム画面" width="500">
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 投稿一覧
+<img src="./screenshots/index.png" alt="投稿画面" width="500">
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### ランキング画面
+<img src="./screenshots/ranking.png" alt="ランキング画面" width="500">
 
-## Laravel Sponsors
+### コミュニティ画面
+<img src="./screenshots/community.png" alt="コミュニティ画面" width="500">
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### チャット画面
+<img src="./screenshots/chat.png" alt="チャット画面" width="500">
 
-### Premium Partners
+### プロフィール画面
+<img src="./screenshots/profile.png" alt="プロフィール画面" width="500">
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### 検索結果画面
+<img src="./screenshots/map.png" alt="検索結果画面" width="500">
 
-## Contributing
+## 工夫点
+- 誰もが使いやすいシンプルなレイアウトで、ホーム画面にはアプリの使い方ガイドを表示
+- 投稿ランキングとユーザーランキングを実装し、ユーザーの投稿意欲を高める工夫
+- コミュニティ機能の実装により、趣味が合うユーザー同士の交流を促進
+- 地図検索機能の実装により、投稿された古着屋情報を視覚的に確認可能
+- 都道府県による絞り込み検索機能の実装
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 苦労した点
+- Laravel breezeにデフォルトで使用されているレイアウトの変更
+- Google Map APIの使用
+- ランキング機能での同率順位の考慮
 
-## Code of Conduct
+## 今後の展望
+- **新機能の追加**: 個人チャット機能の追加
+- **スマートフォン対応**: モバイルフレンドリーなデザインへの最適化
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## ER図
+### ER図です
+<img src="./screenshots/er.png" alt="ER図" width="500">
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
